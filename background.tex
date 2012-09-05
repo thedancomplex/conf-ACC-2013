@@ -17,6 +17,88 @@ and
 \frac{\theta_L}{\theta_a} = \frac{K_c+sB_c}{s^2+J_L+sB_L+K_c+sB_c}
 \end{equation}
 
-is the relationship between $\theta_L$ and $\theta_a$.  \ref{eq:thetaLthetaa} shows the relationship between $\theta_L$ and $\theta_a$ as the ratio of $\frac{\theta_L}{\theta_a}$. Note that $\theta_a$ contains up to and including first order terms and ?L includes up to and including second order terms.
+is the relationship between $\theta_L$ and $\theta_a$.  (\ref{eq:thetaLthetaa}) shows the relationship between $\theta_L$ and $\theta_a$ as the ratio of $\frac{\theta_L}{\theta_a}$. Note that $\theta_a$ contains up to and including first order terms and ?L includes up to and including second order terms.
+
+
+%\begin{equation}
+%T(s) = \left( (s^2J_a+sB_a+K_c+sB_c)- \frac{(K_c+sB_c)(K_c+sB_c)}{s^2J_L + sB_L + K_c +sB_c}\right) \theta_a
+%\end{equation}
+
+
+\begin{equation}
+\frac{\theta_a(s)}{T(s)} = \frac{\frac{1}{J_aJ_L}(s^2J_L+s(B_L+B_c)+Kc)}{s^4 + K_1\frac{s^3}{J_aJ_L} + K_2\frac{s^2}{J_aJ_L} + K_3\frac{s}{J_aJ_L}}
+\end{equation}
+
+where
+
+\begin{eqnarray}
+K_1 & =& J_aB_L+B_aJ_L+B_cJa+B_cJ_L \\
+K_2 & =& K_cJ_a + B_aB_L +B_cB_a +K_cJ_L +B_cB_L \\
+K_3 & =& K_cB_a+K_cB_L
+\end{eqnarray}
+
+The system can then be moved to state space
+
+\begin{equation}
+\begin{array}{ccccccc}
+
+\left[
+\begin{array}{l}
+\ddot{\theta_a} 	\\ 
+\dot{\theta_a}		\\
+\ddot{\theta_L}	\\
+\dot{\theta_L}
+\end{array}
+\right]
+
+
+&
+=
+&
+A
+&
+\left[
+\begin{array}{l}
+\dot{\theta_a} 	\\ 
+\theta_a		\\
+\dot{\theta_L}	\\
+\theta_L
+\end{array}
+\right]
+
+&
++
+&
+\left[
+\begin{array}{r}
+J^{-1}_a 	\\ 
+0		\\
+0	\\
+0
+\end{array}
+\right]
+
+& 
+T(t)
+\end{array}
+\end{equation}
+
+
+where 
+\begin{equation}
+\array{ccc}
+A
+&
+=
+&
+\left[
+\begin{array}{cccc}
+\frac{-(B_a+b_c)}{J_a}   	& \frac{-K_c}{J_a}   	& \frac{B_c}{J_a}   		&	\frac{K_c}{J_a} \\
+1 					& 0				& 0					&	0			\\
+\frac{B_c}{J_L}			& \frac{K_c}{J_L}	& \frac{-(B_c+B_L)}{J_L}	& 	\frac{-K_c}{J_L} \\
+0					& 0				& 0					&	1		
+\end{array}
+\right]
+\end{equation}
 
 
