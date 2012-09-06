@@ -1,142 +1,24 @@
-\section{Background}
-A system with TR typically consists of three main items:
-\begin{itemize}
-\item An actuator, or motor, with a given inertia, $J_a$, and damping, $B_a$, associated with it.
-\item An inertial load, $J_L$, with a given damping, $B_L$, associated with it.
-\item A coupler between the actuator and the load with a spring constant, $K_C$, and a damping, $B_C$, associated with it.
-\end{itemize}
+\section{Background}\label{sec:back}
+The ideal frequency response of a coupled system, with motor position $\theta_a$ as the output and motor torque $T_{in}$ as the input, can be found in Fig.~\ref{fig:desBode}(left). The magnitude portion of the frequency response is a straight line with a slope of negative 40dB/dec. The phase of the latter system does not change. The frequency response of the system exhibiting TR can be found in Fig.~\ref{fig:desBode}(right). It can be noted that at resonance there is a peak. This peak reduces the gain margin of the system. The phase also changes around the resonance which reduces the phase margin.
 
-It is assumed that the inertia of the coupler is included in the inertia of the actuator and the load. The physical diagram of the system with TR can be found in Fig.\ref{fig:couple}. In order to find the transfer function for this system, where $T_{in}$ is the torque input and the actuator angle $\theta_a$ is the output, the physical diagram is then converted into a mechanical network, see Fig.~\ref{fig:mech}, so the system's dynamics can be written as
+Contemporary ways of reducing the effects of TR include; Reducing the servo's bandwidth so it does not include the TR frequencies. Increasing the couplers spring constant $K_c$ via using higher quality and anti backlash mechanical couplers and gearboxes to push the TR frequencies higher. Using notch filters to reduce the resonant peak. as well as active damping methods\cite{5730488}.   
 
-\begin{figure}[h]
+Reducing the bandwidth of the servo means that the designed system will not be able to respond as quickly to an input stimulus. Using higher quality and anti-backlash mechanical couplers and gearboxes will give you greater bandwidth but will also include a higher materials price tag. It is also important to note that the use of notch filters is only useful in systems where the TR does not change. Most systems that have TR present tend to have nonlinear, and time varying, elements, including dynamic loads, that will cause the TR frequency to change thus making the notch filter less effective in the ideal case.  
+
+Rizzo et. al.\cite{bigley1978resonance} presented a technique for, as they describe it, ``\textit{eliminating the destabilizing effect of mechanical resonance in feedback control systems}.''  The goal of their research was to make a wide band high performance closed loop servo system. In their research Bigley and Rizzo found a relationship between the torque, or current, on the DC motor and the velocity of the shaft. They found that when the current is at its maximum the velocity is at a minimum, no matter where the resonance or anti resonance occurs, see Fig.~\ref{fig:re}. Thus feeding back the velocity and torque states would compensate for the effects of TR no matter where it occurs even when the parameters of the system changes.
+
+Sliding mode control (SMC) is a good candidate method to reduce the effects of TR as stated by Korondi et. al.\cite{681228}. This is because SMC is a robust control method that is able to properly control a system even when parameters are not precisely known.   The main idea about SMC is that you are able to make a control that will guarantee the performance of a system in $u$ and $x$, see Fig.~\ref{fig:smcSliding}, within a given error $\psi$ and $\epsilon$ respectively. When using SMC one, or more, parameters are chosen to be unknown. The unknown parameters are given a range that they are able to be between and still have the system perform properly.
+
+\begin{figure}[t]
   \centering
-\includegraphics[width=1.0\columnwidth]{./pix/mech.png}
-  \caption{Mechanical schematic drawling of system with TR}
-  \label{fig:mech}
-\end{figure}
-
-\begin{equation}
-%T(t) = J_a\ddot{\theta_a}+\left( B_a+B_c \right) \dot{\theta_a}=K_c\theta_a-\left(K_c\theta_L+B_c\dot{\theta_L}\right)
-T(t) = J_a\ddot{\theta_a}+(B_a+B_c ) \dot{\theta_a}=K_c\theta_a-(K_c\theta_L+B_c\dot{\theta_L})
-\end{equation}
-
-and
-
-
-
-\begin{equation}\label{eq:thetaLthetaa}
-\frac{\theta_L}{\theta_a} = \frac{K_c+sB_c}{s^2+J_L+sB_L+K_c+sB_c}
-\end{equation}
-
-is the relationship between $\theta_L$ and $\theta_a$ as shown as the ratio of $\frac{\theta_L}{\theta_a}$. Note that $\theta_a$ contains up to and including first order terms and $\theta_L$ includes up to and including second order terms.  The relationship between $\theta_a$ and torque, $T$, is represented as
-
-
-%\begin{equation}
-%T(s) = \left( (s^2J_a+sB_a+K_c+sB_c)- \frac{(K_c+sB_c)(K_c+sB_c)}{s^2J_L + sB_L + K_c +sB_c}\right) \theta_a
-%\end{equation}
-
-
-\begin{equation}\label{eq:tf}
-\frac{\theta_a(s)}{T(s)} = \frac{\frac{1}{J_aJ_L}(s^2J_L+s(B_L+B_c)+Kc)}{s^4 + K_1\frac{s^3}{J_aJ_L} + K_2\frac{s^2}{J_aJ_L} + K_3\frac{s}{J_aJ_L}}
-\end{equation}
-
-where
-
-
-\begin{eqnarray}
-K_1 & =& J_aB_L+B_aJ_L+B_cJa+B_cJ_L \\
-K_2 & =& K_cJ_a + B_aB_L +B_cB_a +K_cJ_L +B_cB_L \\
-K_3 & =& K_cB_a+K_cB_L
-\end{eqnarray}
-
-The system can represented in state space as
-
-In this system $B_a << B_L$ therefor $B_a$ is assumed to be zero.
-
-
-
-
-
-
-
-
-
-The poles of a system with TR (\ref{eq:tf}) consists of a double pole at the origin and complex conjugate (CC) poles.  The CC poles are in the left half plane (LHP) as long as the following inequality is satisfied.
-
-\begin{equation}
-4K_c > B_c^2 \left( \frac{J_c+J_L}{J_aJ_L} \right)
-\end{equation}
-
-\noindent The system can represented in state space as
-\input{stateSpaceEQ.tex}
-
-\noindent standard techniques show that the system is fully controllable and with the angular position $\theta_a$ being the only output is also fully observable.  The controllability and observability matrix are both full rank.
-
-
-
-A system exhibiting TR has a non-zero spring constant in the coupler $K_c$.  Fig.~\ref{fig:trBode} shows the frequency response of a system exhibiting TR, a system not exhibiting TR with an inertial load of $J_a$ and a system not exhibiting TR with the inertial load of $J_a+J_L$.  The dominant load before resonance is the total inertial load ($J_a+J_L$) where after resonance it is only the actuator's inertia.  The resonance $\omega_r$ and anti-resonance $\omega_{ar}$ can be calculated by
-
-
-\begin{equation}
-\begin{array}{cc}
-
-\omega_{ar} = \left(\frac{K_c}{J_L}\right)^\frac{1}{2}
-
-&
-
-\omega_{r} = \left(\frac{K_c}{\frac{J_aJ_L}{J_a+J_L}}\right)^\frac{1}{2}
-\end{array}
-\end{equation}
-
-\noindent and the gain separation when going from an acting load of $J_L+J_a$ to $J_a$, as seen in Fig.~\ref{fig:trBode}, is calculated by
-
-\begin{equation}
-\Delta dB = 40\mbox{log}_{10}\left(\frac{\omega_r}{\omega_{ar}}\right)
-\end{equation}
-
-
-\begin{figure}[h]
-  \centering
-\includegraphics[width=1.0\columnwidth]{./pix/bode.pdf}
-  \caption{Frequency Response Plot of System with TR (from Eq. \ref{eq:ssTR}), System with no TR with
-inertial load of $J_a$, and System with no TR and inertial load of $J_a+J_L$}
-  \label{fig:trBode}
+\includegraphics[width=1.0\columnwidth]{./pix/desBode.pdf}
+  \caption{Frequency Response of desired coupled system (Left), Frequency response of system
+exhibiting TR (Right)}
+  \label{fig:desBode}
 \end{figure}
 
 
-\subsection{Effects of TR on effective load}
-The dipping and peaking of the magnitude of the frequency response plot of a system with TR is not the
-only effect that TR has on the system. Another effect is a change in the effective load seen by the system
-before $\omega_{ar}$ to after $\omega_r$, see Fig.~\ref{fig:trBode}. Before the $\omega_{ar}$ the acting inertial load on the system is the sum of the
-actuator’s inertial load, $J_a$, and the load’s inertial load, $J_L$. This is a second order system with a slope of
-negative $40\frac{dB}{dec}$ on the frequency response plot. After the $\omega_{r}$ the acting inertial load is only the
-actuator’s inertia, $J_a$, which also defines a second order system with a slope of negative $40\frac{dB}{dec}$ on the
-frequency response plot. The latter characteristics can be seen in the frequency response plot in Fig.~\ref{fig:trBode}.
-It can be noted that there is an offset between the frequency responses of the second order estimations of
-the system with TR when going from before the war to after the $\omega_{r}$ when looking at the magnitude in $dB$ of
-the response. This offset, known as gain separation, means that there is a parameter, in this case the
-effective inertia on the system, which is changing. Fig.~\ref{fig:trBode} shows the frequency response of the system
-with TR from Figure 3 and values from Table~\ref{table:defaultVals} with the added frequency responses of a systems with out
-TR but having the effective load as $J_L+J_a$ and $J_a$.
-
-\begin{center}
-
-	\begin{table}\label{table:defaultVals}
-	\caption{Values used for TR model based on the PITTMAN\textsuperscript{\texttrademark} N2314 series brushless DC servo motor and a custom inertial load/coupler}
-	\begin{center}
-  \begin{tabular}{ c | c | c | c }
-
-    					& Inertia 'J' 								&	Damping 'B' 												&	Spring 'K'  									\\ 
-    					& ($oz-in-sec^2$)							&	($\frac{oz-in}{krpm}$)							&	$\frac{oz}{in}$) 							\\ \hline
-    Actuator 	& 0.0023 											& 0																		& 0															\\ \hline
-    Coupler 	& 0 													& 0.005 															& 55														\\ \hline
-    Load 			& 0.0033 											& 0																		& 0															\\
-
-  \end{tabular}
-  \end{center}
-  \end{table}
-\end{center}
 
 
 
-\cite{5686315}
+
