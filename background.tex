@@ -6,7 +6,14 @@ A system with TR typically consists of three main items:
 \item A coupler between the actuator and the load with a spring constant, $K_C$, and a damping, $B_C$, associated with it.
 \end{itemize}
 
-It is assumed that the inertia of the coupler is included in the inertia of the actuator and the load. The physical diagram of the system with TR can be found in Figure\ref{fig:couple}. In order to find the transfer function for this system, where Tin is the torque input and the actuator angle $\theta_a$ is the output, the physical diagram is then converted into a mechanical network, see Figure 4, so the system's dynamics can be written as
+It is assumed that the inertia of the coupler is included in the inertia of the actuator and the load. The physical diagram of the system with TR can be found in Fig.\ref{fig:couple}. In order to find the transfer function for this system, where $T_{in}$ is the torque input and the actuator angle $\theta_a$ is the output, the physical diagram is then converted into a mechanical network, see Fig.~\ref{fig:mech}, so the system's dynamics can be written as
+
+\begin{figure}[h]
+  \centering
+\includegraphics[width=1.0\columnwidth]{./pix/mech.png}
+  \caption{Mechanical schematic drawling of system with TR}
+  \label{fig:mech}
+\end{figure}
 
 \begin{equation}
 %T(t) = J_a\ddot{\theta_a}+\left( B_a+B_c \right) \dot{\theta_a}=K_c\theta_a-\left(K_c\theta_L+B_c\dot{\theta_L}\right)
@@ -51,13 +58,6 @@ In this system $B_a << B_L$ therefor $B_a$ is assumed to be zero.
 
 
 
-\begin{figure}[h]
-  \centering
-\includegraphics[width=1.0\columnwidth]{./pix/trshow.png}
-  \caption{Frequency Response Plot of System with TR (from Eq. \ref{eq:ssTR}), System with no TR with
-inertial load of $J_a$, and System with no TR and inertial load of $J_a+J_L$}
-  \label{fig:trBode}
-\end{figure}
 
 
 
@@ -72,6 +72,70 @@ The poles of a system with TR (\ref{eq:tf}) consists of a double pole at the ori
 
 \noindent standard techniques show that the system is fully controllable and with the angular position $\theta_a$ being the only output is also fully observable.  The controllability and observability matrix are both full rank.
 
+
+
+A system exhibiting TR has a non-zero spring constant in the coupler $K_c$.  Fig.~\ref{fig:trBode} shows the frequency response of a system exhibiting TR, a system not exhibiting TR with an inertial load of $J_a$ and a system not exhibiting TR with the inertial load of $J_a+J_L$.  The dominant load before resonance is the total inertial load ($J_a+J_L$) where after resonance it is only the actuator's inertia.  The resonance $\omega_r$ and anti-resonance $\omega_{ar}$ can be calculated by
+
+
+\begin{equation}
+\begin{array}{cc}
+
+\omega_{ar} = \left(\frac{K_c}{J_L}\right)^\frac{1}{2}
+
+&
+
+\omega_{r} = \left(\frac{K_c}{\frac{J_aJ_L}{J_a+J_L}}\right)^\frac{1}{2}
+\end{array}
+\end{equation}
+
+\noindent and the gain separation when going from an acting load of $J_L+J_a$ to $J_a$, as seen in Fig.~\ref{fig:trBode}, is calculated by
+
+\begin{equation}
+\Delta dB = 40\mbox{log}_{10}\left(\frac{\omega_r}{\omega_{ar}}\right)
+\end{equation}
+
+
+\begin{figure}[h]
+  \centering
+\includegraphics[width=1.0\columnwidth]{./pix/bode.pdf}
+  \caption{Frequency Response Plot of System with TR (from Eq. \ref{eq:ssTR}), System with no TR with
+inertial load of $J_a$, and System with no TR and inertial load of $J_a+J_L$}
+  \label{fig:trBode}
+\end{figure}
+
+
+\subsection{Effects of TR on effective load}
+The dipping and peaking of the magnitude of the frequency response plot of a system with TR is not the
+only effect that TR has on the system. Another effect is a change in the effective load seen by the system
+before $\omega_{ar}$ to after $\omega_r$, see Fig.~\ref{fig:trBode}. Before the $\omega_{ar}$ the acting inertial load on the system is the sum of the
+actuator’s inertial load, $J_a$, and the load’s inertial load, $J_L$. This is a second order system with a slope of
+negative $40\frac{dB}{dec}$ on the frequency response plot. After the $\omega_{r}$ the acting inertial load is only the
+actuator’s inertia, $J_a$, which also defines a second order system with a slope of negative $40\frac{dB}{dec}$ on the
+frequency response plot. The latter characteristics can be seen in the frequency response plot in Fig.~\ref{fig:trBode}.
+It can be noted that there is an offset between the frequency responses of the second order estimations of
+the system with TR when going from before the war to after the $\omega_{r}$ when looking at the magnitude in $dB$ of
+the response. This offset, known as gain separation, means that there is a parameter, in this case the
+effective inertia on the system, which is changing. Fig.~\ref{fig:trBode} shows the frequency response of the system
+with TR from Figure 3 and values from Table~\ref{table:defaultVals} with the added frequency responses of a systems with out
+TR but having the effective load as $J_L+J_a$ and $J_a$.
+
+\begin{center}
+
+	\begin{table}\label{table:defaultVals}
+	\caption{Values used for TR model based on the PITTMAN\textsuperscript{\texttrademark} N2314 series brushless DC servo motor and a custom inertial load/coupler}
+	\begin{center}
+  \begin{tabular}{ c | c | c | c }
+
+    					& Inertia 'J' 								&	Damping 'B' 												&	Spring 'K'  									\\ 
+    					& ($oz-in-sec^2$)							&	($\frac{oz-in}{krpm}$)							&	$\frac{oz}{in}$) 							\\ \hline
+    Actuator 	& 0.0023 											& 0																		& 0															\\ \hline
+    Coupler 	& 0 													& 0.005 															& 55														\\ \hline
+    Load 			& 0.0033 											& 0																		& 0															\\
+
+  \end{tabular}
+  \end{center}
+  \end{table}
+\end{center}
 
 
 
