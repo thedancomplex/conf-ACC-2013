@@ -29,7 +29,7 @@ feedback gain and 20 for the angular velocity feedback. Table~\ref{table:results
 in magnitude and phase of the frequency response plot of the
 system with TR and the addition of Rizzo’s resonance equalization (RE)\cite{bigley1978resonance}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
 \includegraphics[width=1.0\columnwidth]{./pix/reSim.pdf}
   \caption{V.Rizzo’s resonance equalized rate loop diagram using SVF\cite{bigley1978resonance}}
@@ -37,7 +37,14 @@ system with TR and the addition of Rizzo’s resonance equalization (RE)\cite{bigl
 \end{figure}
 
 
-This results in a reduction of the resonance and anti-resonance and the corresponding phase shift.  RE does not eliminate the load switching ($\Delta dB$) as shown in Fig.~\ref{fig:trBode}.  The motor velocity $\dot{\theta_a}$ and motor current $i_a$ states are required to implement RE.
+This results in a reduction of the resonance and anti-resonance and the corresponding phase shift.  Fig.~\ref{fig:reBode} shows the frequency response of RE on the TR system.  RE does not eliminate the load switching ($\Delta dB$) as shown in Fig.~\ref{fig:trBode}.  The motor velocity $\dot{\theta_a}$ and motor current $i_a$ states are required to implement RE.
+
+\begin{figure}[ht]
+  \centering
+\includegraphics[width=0.8\columnwidth]{./pix/rizzoBode.pdf}
+  \caption{Frequency responce of V.Rizzo’s resonance equalized TR system}
+  \label{fig:reBode}
+\end{figure}
 
 
 \subsection{Sliding Mode Control}\label{sec:smc}
@@ -75,7 +82,7 @@ The effective load has been taken care of by letting it vary; thus the model of 
   \centering
 \includegraphics[width=0.7\columnwidth]{./pix/smcMech.pdf}
   \caption{Mechanical Schematic Drawling of Reduced System for SMC based on Fig~\ref{fig:couple}}
-  \label{fig:smcSliding}
+  \label{fig:smcMech}
 \end{figure}
 
 \noindent The dynamic equations for the system in Fig.~\ref{fig:smcSliding} are written as
@@ -165,6 +172,7 @@ F\geq \left|f-\hat{f}\right| & \rightarrow & F=R_x\left|\dot{\theta}\right|
 The values $\eta$ and $\lambda$ are restricted by the sampling rate of the controller. 
 Both of the latter values are not to
 exceed a numerical value of half the sampling frequency in Hz.
+Fig.~\ref{fig:danBode} shows the frequency response of SMC on the TR system
 
 Multiple simulations were made on the SMC control method to reduce the effects of TR. Table~\ref{table:resultsClosedLoop} shows the
 results of these test for multiple ratios of $J_L:J_a$.  
@@ -172,3 +180,12 @@ It is apparent from the simulations that the system will track the desired wavef
 Load switching has no effect on the system as long as the apparent load stays between $J_{min}$ and $J_{max}$.
 As the ration $\frac{J_L}{J_a} \rightarrow 0$ the effect of TR on both the magnitude and the phase goes to zero.
 To motor position $\theta_a$ and motor velocity $\dot{\theta}_a$ are needed to preform proper SMC in a TR system. 
+
+\input{results.tex} 
+
+\begin{figure}[ht]
+  \centering
+\includegraphics[width=0.8\columnwidth]{./pix/danBode.pdf}
+  \caption{Frequency response plot for SMC on system with TR with $\eta= 0.3$ and $\lambda=30,000$}
+  \label{fig:danBode}
+\end{figure}

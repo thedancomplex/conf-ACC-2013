@@ -24,7 +24,7 @@
 %\usepackage{times} % assumes new font selection scheme installed
 %\usepackage{amsmath} % assumes amsmath package installed
 %\usepackage{amssymb}  % assumes amsmath package installed
-
+\usepackage{placeins}
 
 
 
@@ -60,7 +60,6 @@ Control Design to Reduce the Effects of Torsional Resonance in Coupled Systems
         {\tt\small tchmiele@cbis.ece.drexel.edu}}%
 }
 
-
 \begin{document}
 
 
@@ -80,13 +79,14 @@ Control Design to Reduce the Effects of Torsional Resonance in Coupled Systems
 \input{introduction.tex}
 \input{background.tex}
 \input{model.tex}
+\input{load.tex}
 \input{methodology.tex}
 %\input{comparison.tex}
-\input{results.tex}
+%\input{results.tex}
 
 \input{conclusion.tex}
 
-
+\FloatBarrier
 \bibliographystyle{IEEEtran}
 %\bibliographystyle{plain}
 \bibliography{tr}{}
