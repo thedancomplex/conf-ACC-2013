@@ -36,20 +36,11 @@ is the relationship between $\theta_L$ and $\theta_a$ as shown as the ratio of $
 
 
 \begin{equation}\label{eq:tf}
-\frac{\theta_a(s)}{T(s)} = \frac{\frac{1}{J_aJ_L}(s^2J_L+s(B_L+B_c)+Kc)}{s^4 + K_1\frac{s^3}{J_aJ_L} + K_2\frac{s^2}{J_aJ_L} + K_3\frac{s}{J_aJ_L}}
+\frac{\theta_a(s)}{T(s)} = \frac{  \frac{1}{J_aJ_L}\left(s^2J_L+K_c + sB_c\right)  }{s^2 \left( s^2+B_c\frac{J_a+J_L}{J_aJ_L} s + K_c \frac{J_a+J_L}{J_aJ_L} \right)}
+%\frac{\theta_a(s)}{T(s)} = \frac{\frac{1}{J_aJ_L}(s^2J_L+s(B_L+B_c)+Kc)}{s^4 + K_1\frac{s^3}{J_aJ_L} + K_2\frac{s^2}{J_aJ_L} + K_3\frac{s}{J_aJ_L}}
 \end{equation}
 
-where
-
-
-\begin{eqnarray}
-K_1 & =& J_aB_L+B_aJ_L+B_cJa+B_cJ_L \\
-K_2 & =& K_cJ_a + B_aB_L +B_cB_a +K_cJ_L +B_cB_L \\
-K_3 & =& K_cB_a+K_cB_L
-\end{eqnarray}
-
-
-In this system $B_a << B_L$ therefor $B_a$ is assumed to be zero.
+In this system $B_a << B_L$ therefore $B_a$ is assumed to be zero.
 
 
 
@@ -73,10 +64,18 @@ The poles of a system with TR (\ref{eq:tf}) consists of a double pole at the ori
 
 
 
-A system exhibiting TR has a non-zero spring constant in the coupler $K_c$.  Fig.~\ref{fig:trBode} shows the frequency response of a system exhibiting TR, a system not exhibiting TR with an inertial load of $J_a$ and a system not exhibiting TR with the inertial load of $J_a+J_L$.  The dominant load before resonance is the total inertial load ($J_a+J_L$) where after resonance it is only the actuator's inertia.  The resonance $\omega_r$ and anti-resonance $\omega_{ar}$ can be calculated by
+%A system exhibiting TR has a non-zero spring constant in the coupler $K_c$. 
+The resonance and anti-resonance frequencies, $\omega_r$ and $\omega_{ar}$, are defined by the inertial load of coupled system as well as the spring constant of the coupler $K_c$, Eq.\ref{eq:res}\cite{chmielewski}.
+Fig.~\ref{fig:trBode} shows the frequency response of a system that is:
+\begin{itemize}
+\item exhibiting TR
+\item not exhibiting TR with a total inertial load of $J_a$
+\item not exhibiting TR with a total inertial load of $J_a+J_L$.  
+\end{itemize}
+The dominant load before resonance is the total inertial load ($J_a+J_L$) where after resonance it is only the actuator's inertia.  The resonance $\omega_r$ and anti-resonance $\omega_{ar}$ can be calculated by
 
 
-\begin{equation}
+\begin{equation}\label{eq:res}
 \begin{array}{cc}
 
 \omega_{ar} = \left(\frac{K_c}{J_L}\right)^\frac{1}{2}
@@ -87,7 +86,7 @@ A system exhibiting TR has a non-zero spring constant in the coupler $K_c$.  Fig
 \end{array}
 \end{equation}
 
-\noindent and the gain separation when going from an acting load of $J_L+J_a$ to $J_a$, as seen in Fig.~\ref{fig:trBode}, is calculated by
+\noindent and the gain separation when going from an acting load of $J_L+J_a$ to $J_a$, as seen in Fig.~\ref{fig:trBode}, is calculated by Chmielewski et. al.\cite{chmielewski} and is
 
 \begin{equation}\label{eq:deltaDB}
 \Delta dB = 40\mbox{log}_{10}\left(\frac{\omega_r}{\omega_{ar}}\right)
