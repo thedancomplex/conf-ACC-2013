@@ -1,8 +1,23 @@
 \noindent The system can represented in state space as
 
-\begin{equation}\label{eq:ssTR}
-\begin{array}{lllllll}
+\begin{equation}
+\begin{array}{c}
+\dot{x}(t) = \mbox{A}x(t) + \mbox{B}u(t) \\
+y(t) = \mbox{C}x(t) + \mbox{D}u(t)
+\end{array}
+\end{equation}
 
+\begin{equation}\label{eq:ssTR}
+\begin{array}{llllll}
+
+\dot{x}(t)
+&
+
+ =
+
+&
+
+ 
 \left[
 \begin{array}{l}
 \ddot{\theta_a} 	\\ 
@@ -17,46 +32,24 @@
 &
 
 
-=
+,
+
 
 &
 
-A
-
-&
-
-\left[
-\begin{array}{l}
-\dot{\theta_a} 	\\ 
-\theta_a		\\
-\dot{\theta_L}	\\
-\theta_L
-\end{array}
-\right]
-
-&
-
-+
-
-&
-
-B
-
-&
-
-T(t)
+u(t) =T(t)
 
 
 \end{array}
 \end{equation}
 
 
-where
+and
 
 
 \begin{equation}
-\begin{array}{lll}
-A
+\begin{array}{ccc}
+\mbox{A}
 &
 =
 &
@@ -78,37 +71,29 @@ A
 
 
 \begin{equation}
-\begin{array}{lllrrr}
-B
-
-&
-
-=
-
-&
-
+\mbox{B} = 
 \left[
-\begin{array}{r}
-J^{-1}_a 	\\ 
-0		\\
-0	\\
+\begin{array}{cccc}
+J^{-1}_a 	&
+0		&
+0		&
 0
 \end{array}
-\right]
-,
-&
-C
-&
+\right]^{-1}
+\end{equation}
+
+\begin{equation}
+\begin{array}{ccc}
+\mbox{C}
 =
-&
 \left[
 \begin{array}{cccc}
 0 	&	1	&	0	&	0
 \end{array}
 \right]
-
-
-
-
+&
+,
+&
+\mbox{D} = 0
 \end{array}
 \end{equation}
