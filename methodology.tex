@@ -37,32 +37,44 @@ system with TR and the addition of Rizzo’s resonance equalization (RE)\cite{bigl
 \end{figure}
 
 
-This results in a reduction of the resonance and anti-resonance and the corresponding phase shift.  Fig.~\ref{fig:reBode} shows the frequency response of RE on the TR system.  RE does not eliminate the load switching ($\Delta dB$) as shown in Fig.~\ref{fig:trBode}.  The motor velocity $\dot{\theta_a}$ and motor current $i_a$ states are required to implement RE.
+This results in a reduction of the resonance and anti-resonance and the corresponding phase shift.  Fig.~\ref{fig:reBode} shows the frequency response of RE on the TR system.  RE eliminates the load switching ($\Delta dB$) as shown in Fig.~\ref{fig:trBode}.  However the motor velocity $\dot{\theta_a}$ and motor current $i_a$ states are required to implement RE.
 
 \begin{figure}[ht]
   \centering
-\includegraphics[width=0.8\columnwidth]{./pix/rizzoBode.pdf}
-  \caption{Frequency responce of V.Rizzo’s resonance equalized TR system}
+\includegraphics[width=1\columnwidth]{./pix/bodeTRandRE4.pdf}
+  \caption{Frequency response of V. Rizzo’s resonance equalization (RED) plotted over a system exhibiting TR system (BLUE).  The resonance equalized system is using an ideal model of a DC motor for use in the state variable feedback.}
   \label{fig:reBode}
 \end{figure}
 
 
 \subsection{Sliding Mode Control}\label{sec:smc}
 Sliding Mode Control (SMC) is a form of non-linear control that is able deal with systems that are not
-linear as well as systems that have parameters which are not precisely known. The main idea about SMC is
-that the performance of a system is guaranteed to be inside $u$ and $x$, see Figure 31, within a given error ö
-and å respectively. When using SMC one, or multiple, parameters are chosen to be unknown. These
-unknown parameters are specified a range at which the given parameters are able to vary between and still
-have the system perform within its given bounds $\psi$ and $\epsilon$. It is important to note that this range affects the
-boundary condition $\psi$ and $\epsilon$. Once the system has entered within the boundary layer, or sliding boundary, it
-will never leave it. The latter will hold true as long as the parameters which are able to vary do not go out
+linear as well as systems that have parameters which are not precisely known. 
+We are using sliding mode with boundary layer as defined in Slotine et. al\cite{slotine}.  
+This leads to tracking within a guaranteed precision $\epsilon$ (rather than perfect tracking) and generally guarantees that for all trajectories starting inside boundary layer $\mbox{B}$ (see Fig~\ref{fig:smcSliding})  where 
+
+\begin{equation}
+\begin{array}{ccc}
+\mbox{B} = \{ x , \left| s(x;t) \right|  <=  \Phi \}
+&  
+\mbox{where}
+&
+\Phi > 0
+\end{array}
+\end{equation}
+
+
+When using SMC one, or multiple, parameters are chosen to be unknown. 
+These unknown parameters are specified a range at which the given parameters are able to vary between and retain system perform within its given bounds $\psi$ and $\epsilon$. 
+It is important to note that this range affects the boundary condition $\psi$ and $\epsilon$. Once the system has entered within the boundary layer, or sliding boundary, it will not leave it. 
+The latter will hold true as long as the parameters which are able to vary do not go out
 of the designed bounds \cite{kwatny2000nonlinear}\cite{isidori1995nonlinear}.
 
 
 \begin{figure}[h]
   \centering
-\includegraphics[width=0.7\columnwidth]{./pix/smc.pdf}
-  \caption{SMC Sliding Boundary/Sliding Layer}
+\includegraphics[width=0.7\columnwidth]{./pix/smc2.png}
+  \caption{SMC Sliding Boundary/Sliding Layer $\mbox{B}$}
   \label{fig:smcSliding}
 \end{figure}
 
@@ -94,10 +106,10 @@ T(t) = J\ddot{\theta}+B\dot{\theta} & \rightarrow & \ddot{\theta} = \frac{1}{J}T
 \end{equation}
 
 
-\noindent to implement the SMC $u$ that consists of the approximation of continuous control $\hat{u}$ combined with a switching mode $Q\mbox{sign}(r)$ that is designed to keep the system on the sliding surface
+\noindent to implement the SMC $u$ that consists of the approximation of continuous control $\hat{u}$ combined with a switching mode $Q\mbox{sgn}(r)$ that is designed to keep the system on the sliding surface
 
 \begin{equation}
-u = \hat{u}-Q\mbox{sign}(r)
+u = \hat{u}-Q\mbox{sgn}(r)
 \end{equation}
 
 \noindent where $r$ is the sliding surface
@@ -172,7 +184,15 @@ F\geq \left|f-\hat{f}\right| & \rightarrow & F=R_x\left|\dot{\theta}\right|
 The values $\eta$ and $\lambda$ are restricted by the sampling rate of the controller. 
 Both of the latter values are not to
 exceed a numerical value of half the sampling frequency in Hz.
-Fig.~\ref{fig:danBode} shows the frequency response of SMC on the TR system
+Fig.~\ref{fig:smcBlock} shows the block diagram of the SMC on the TR system.
+Fig.~\ref{fig:danBode} shows the frequency response of SMC on the TR system.
+
+\begin{figure}[h]
+  \centering
+\includegraphics[width=1\columnwidth]{./pix/smcBlock.pdf}
+  \caption{Frequency response plot for SMC on system with TR with $\eta= 0.3$ and $\lambda=30,000$}
+  \label{fig:danBode}
+\end{figure}
 
 Multiple simulations were made on the SMC control method to reduce the effects of TR. Table~\ref{table:resultsClosedLoop} shows the
 results of these test for multiple ratios of $J_L:J_a$.  
@@ -185,7 +205,7 @@ To motor position $\theta_a$ and motor velocity $\dot{\theta}_a$ are needed to p
 
 \begin{figure}[ht]
   \centering
-\includegraphics[width=0.8\columnwidth]{./pix/danBode.pdf}
+\includegraphics[width=1.0\columnwidth]{./pix/danBode.pdf}
   \caption{Frequency response plot for SMC on system with TR with $\eta= 0.3$ and $\lambda=30,000$}
   \label{fig:danBode}
 \end{figure}
