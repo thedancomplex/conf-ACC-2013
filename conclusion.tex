@@ -1,10 +1,9 @@
  \section{Results \& Conclusion}\label{sec:con}
 %\input{results.tex} 
-The two different control designs for reducing the effect of TR in coupled systems, RE and SMC, both
-reduce the effect greatly. Table~\ref{table:resultsClosedLoop} shows the results from the control using RE 
-and the control using SMC. These results show that RE reduces the $\Delta$ TR Mag over a
-greater range than SMC does. Both RE and SMC significantly reduce the $\Delta dB$.  However SMC reduces the $\Delta dB$ to $0dB$ over all of the ratios of $J_L:J_a$ while RE
-continues to have the switching effect causing a $\Delta dB$ around $0.5dB$. It has also been shown that the SMC is effective for dealing with the load switching over a range of $J_L:J_a$ ratios.  The performance and simplicity of RE is good if you have access to the current $i_a$ state. If you only have access to the $\theta_a$ state and do not have a good model of the system then SMC is a valid choice.
- 
- 
- 
+The two different control designs for reducing the effect of TR in coupled systems, RE and SMC, both reduce the effect greatly. Table~\ref{table:resultsClosedLoop} shows the results from the control using RE and the control using SMC. 
+These results show that RE reduces the $\Delta$ TR Mag over a greater range than SMC does. 
+Both RE and SMC significantly reduce the $\Delta dB$.  
+However SMC reduces the $\Delta dB$ to $0dB$ over the defined ratios of $J_L:J_a$ while RE continues to have the switching effect causing a $\Delta dB$ around $0.5dB$. 
+It has also been shown that the SMC is effective for dealing with the load switching over a range of $J_L:J_a$ ratios.  
+The performance and simplicity of RE makes it a good choice if you have access to the current $i_a$ and velocity $\dot{\theta}_a$ states. 
+If do not have a current sensor but you do have access to the position $\theta_a$ and velocity $\dot{\theta}_a$ states then SMC is a valid choice.  

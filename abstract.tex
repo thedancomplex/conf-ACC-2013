@@ -1,5 +1,10 @@
-Connecting two rotary mechanical devices utilizes a flexible coupler to accommodate various shaft misalignments. These couplers, including belts and gear boxes, exhibit a spring constant and a viscous damping term. The spring constant causes the system to have a resonant frequency while the damping controls its amplitude. In the frequency domain this characteristic is called Torsional Resonance (TR). The TR frequencies can not be allowed into the pass band of closed loop servo because it will cause instability.
-Some conventional solutions to obtain stable operation include: reduction of the servo’s bandwidth below the TR frequencies; using stiffer, more expensive, components to increase the TR frequencies thus increasing the useable bandwidth; and using notch filters to reduce the resonant peak.
-The objective of this work is provide a control solution to allow systems using elastic parts, including loose belt drives and plastic gears, achieve sufficient bandwidth to obtain their desired performance. A model of a commercial application exhibiting the TR characteristic has been made using Matlab and Simulink.
-Linear state feedback techniques described by Rizzo et. al. and non-linear Sliding Mode Control (SMC) is modeled, implemented and compared.
+Connecting two rotary mechanical devices typically utilizes a flexible coupler to accommodate various shaft misalignments. 
+These couplers, including belts and gear boxes, exhibit a spring constant and a viscous damping term. 
+The spring constant causes the system to have a resonant frequency while the damping controls its amplitude. 
+In the frequency domain this characteristic is called Torsional Resonance (TR). 
+If the TR frequencies are allowed into the pass band of closed loop servo because it will cause instability.
+Some conventional solutions to obtain stable operation include: reduction of the servo's bandwidth below the TR frequencies; using stiffer, more expensive, components to increase the TR frequencies thus increasing the usable bandwidth; and using notch filters to reduce the resonant peak.
+The objective of this work is to explore control solutions to allow systems using elastic parts, including loose belt drives and plastic gears, achieve sufficient bandwidth to obtain their desired performance. 
+A model of a commercial application exhibiting the TR characteristic has been made using Matlab and Simulink.
+Linear state feedback techniques described by Bigley et. al. and non-linear Sliding Mode Control (SMC) is modeled, implemented and compared.
 Conclusions and observations are discussed on the state of the art of torsional resonance effect reduction. 

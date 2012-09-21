@@ -8,24 +8,27 @@ negative $40\frac{dB}{dec}$ on the frequency response plot. After the $\omega_{r
 actuator’s inertia, $J_a$, which also defines a second order system with a slope of negative $40\frac{dB}{dec}$ on the
 frequency response plot. The latter characteristics can be seen in the frequency response plot in Fig.~\ref{fig:trBode}.
 
-\noindent Transfer function for a mass spring damper system with effective load of $J_a+J_L$, ideal coupler (pre-$\omega_{ar}$)
+\noindent Transfer function $\frac{\theta_{a1}(s)}{T(s)}$ is for a mass spring damper system with effective load of $J_a+J_L$, ideal coupler (pre-$\omega_{ar}$)
 
 \begin{equation}
-\frac{\theta_{J_a+J_L}(s)}{T(s)}=\frac{1}{(J_a+J_L)s^2}
+\frac{\theta_{a1}(s)}{T(s)}=\frac{1}{(J_a+J_L)s^2}
 \end{equation}
 
-\noindent Transfer function for a mass spring damper system with effective load of $J_a$, ideal coupler (post-$\omega_{r}$)
+\noindent Transfer function $\frac{\theta_{a2}(s)}{T(s)}$ is for a mass spring damper system with effective load of $J_a$, ideal coupler (post-$\omega_{r}$)
 \begin{equation}
-\frac{\theta_{J_a(s)}}{T(s)}=\frac{1}{J_as^2}
+\frac{\theta_{a2}(s)}{T(s)}=\frac{1}{J_as^2}
 \end{equation}
 
 
 It can be noted that there is an offset between the frequency responses of the second order estimations of
 the system with TR when going from before the $\omega_{ar}$ to after the $\omega_{r}$ when looking at the magnitude in $dB$ of
-the response. This offset, known as gain separation, means that there is a parameter, in this case the
-effective inertia on the system, which is changing. Fig.~\ref{fig:trBode} shows the frequency response of the system
-with TR from Eq.~\ref{eq:tf} and values from Table~\ref{table:defaultVals} with the added frequency responses of a systems with out
-TR but having the effective load as $J_L+J_a$ and $J_a$.  This is referred to as load switching.
+the response. 
+This offset is known as gain separation
+Gain separation is the resulting effect of the load switching around $\omega_{ar}$ and $\omega_r$.
+Fig.~\ref{fig:trBode} shows an example of gain separation in the frequency response of the system with TR.
+System with TR is Eq.~\ref{eq:tf} using values from Table~\ref{table:defaultVals}.  
+In addition the frequency responses of systems without TR and having the effective loads of $J_L+J_a$ and $J_a$ are also shown.
+This clearly shows gain separation due to load switching.
 
 \begin{center}
 	\begin{table}
@@ -69,8 +72,8 @@ Magnitude, Horizontal Axis is Time in sec.}
 
 \begin{figure}[ht]
   \centering
-\includegraphics[angle=-90, width=1.0\columnwidth]{./pix/velosMotorAndOutputF.pdf}
-\caption{Angular velocity of the actuator shaft $\dot{\theta}_a$ for the system with TR (GREEN), Angular velocity of the load shaft $\dot{\theta}_L$ for the system with TR (PURPLE), Angular Velocity of the actuator shaft for the system without TR (RED) due to the torque input.  It is important to note that $\dot{\theta}_a$ and $\dot{\theta}_L$ are $180^o$ out of phase.}
+\includegraphics[angle=-90, width=1.0\columnwidth]{./pix/velosMotorAndOutputF33.pdf}
+\caption{Angular velocity of the actuator shaft $\dot{\theta}_a$ for the system with TR (PURPLE), Angular velocity of the load shaft $\dot{\theta}_L$ for the system with TR (GREEN), Angular Velocity of the actuator shaft for the system without TR (RED) due to the torque input.  It is important to note that $\dot{\theta}_a$ and $\dot{\theta}_L$ are $180^o$ out of phase.}
 %  \caption{Angular velocity of the actuator shaft $\dot{\theta}_a$ for the system with TR (Blue), Angular Velocity of
 %the actuator shaft for the system without TR (Red) due to the torque input zoomed in from 1.5 to
 %2.0 sec. Vertical Axis is Magnitude, Horizontal Axis is Time in sec}
@@ -78,16 +81,11 @@ Magnitude, Horizontal Axis is Time in sec.}
 \end{figure}
 
 
-Fig.\ref{fig:trap} shows Fig.~\ref{fig:torqueIn} magnified about 1.5 sec to 2 sec. The angular velocity of
+Fig.\ref{fig:trap} shows Fig.~\ref{fig:torqueIn} magnified where the ideal velocity is constant (1.48 sec to 0.62 sec). The angular velocity of
 the actuator shaft has a decaying sinusoid on it due to the resonance and the spring/damping.  
 The period of is 0.031sec (32.2 Hz, 202.3 rad/sec). This frequency is the
 same as the $\omega_r$ computed in Eq.\ref{eq:tf}, shown in Fig.~\ref{fig:trBode} and uses the values in Table~\ref{table:defaultVals}.  
-This frequency $\omega_n$ can by calculated by
-
-\begin{equation}
-\omega_n=\sqrt{\frac{K_c(J_a+J_L)}{J_aJ_L}}
-\end{equation}
-
+This frequency is calculated by $\omega_r$ in Eq.~\ref{eq:res}.
 
 
 
