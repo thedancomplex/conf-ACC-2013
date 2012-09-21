@@ -1,0 +1,13 @@
+% Torsonal Model Constants from V. Rizzo(one coupler)
+% Book 1 Page 15 for Model
+% Name: Daniel M. Lofaro
+% Date: 2007-01-21
+
+Ke = 10         % BEMF
+Ka = 10         % amplifyer
+R = 10          % armature resistance
+Kt = 10         % torque constant
+Jm = 0.0023     %
+
+Ms = 1/s        % resonant load
+Kr = 10;        % Tachemeter
